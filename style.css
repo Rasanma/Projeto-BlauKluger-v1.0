@@ -4,10 +4,13 @@ body{
 
 canvas{
     position: absolute;
-    top: 0px;
-    bottom: 0px;
+    top: 10px;
     left: 0px;
     right: 0px;
     margin: auto;
     background-color: black;   
+    border-radius: 10px;
+    border-width: 3px;
+    border-style: dashed;
+    border-color: brown;
 }
