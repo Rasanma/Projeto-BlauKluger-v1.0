@@ -9,3 +9,4 @@ Apenas um projeto pessoal. Aprendendo HTML, CSS e JS.
     Foi implimentado o movimento vertical com um controle mais fluido e melhor 
     da posição do objeto.
     Também foi feito a limitação do espaço de movimento dele.
+    Adicionado a geração de inimigos na tela.
