@@ -34,7 +34,7 @@ function main(){
         },
     };
     
-    //cria o persoinagem do jogo
+    //cria o personagem do jogo
     avatar = {
             x:20,
             y:275,
@@ -65,7 +65,8 @@ function main(){
                  /*if(this.y <= 16){
                     alert("limite superior");
                 };*/
-                //this.y = this.y - 32;    
+                //this.y = this.y - 32;   
+
                 this.booster = -0.5;
                 if(this.booster < -1){
                     this.booster = -1;
@@ -77,6 +78,7 @@ function main(){
                     alert("limite inferior");
                 };*/
                 //this.y = this.y + 32;
+
                 this.booster = 0.5;
                 if(this.booster > 1){
                     this.booster = 1;
@@ -85,7 +87,31 @@ function main(){
             },
     };
 
+    //cria os inimigos
 
+    enemy = {
+        enemy_type:[], //um vetor que vai guardar os varios tipos de inimigos
+                       //ajuda a fazer o controle de entrada e saida de elementos  
+        cores:["#ac0000","#003500"],
+
+        generate:function() {
+            enemy.enemy_type.push(
+                {//objeto que vai representar o inimigo criado
+                    x:300,
+                    y:Math.floor(400 * Math.random()),
+                    altura:64,
+                    largura:64,
+                    cor:this.cores[Math.floor(2 * Math.random())]
+                }); //cria um novo inimigo no vetor enemy_type
+        },
+
+        desenha:function() {
+            for(var i=0; i < enemy.enemy_type.length ; i++){
+                    ctx.fillStyle = enemy.enemy_type[i].cor;
+                    ctx.fillRect(enemy.enemy_type[i].x, enemy.enemy_type[i].y, enemy.enemy_type[i].altura, enemy.enemy_type[i].largura);
+            };
+        },
+    };
 
     //fazendo os comandos arrowup e arrowdown paramexer um bloco 
     //primeiro adicionamos os movimentos verticais
@@ -160,6 +186,7 @@ function desenha() {
     ctx.fillStyle = "black";
     ctx.fillRect(0,0,largura,altura);
     ui.desenha();
+    enemy.desenha();
     avatar.desenha();
 };
 
