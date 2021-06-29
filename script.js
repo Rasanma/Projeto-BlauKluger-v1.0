@@ -1,4 +1,4 @@
-var altura, largura, canvas, ctx, totalFrames = 0, speed;
+var altura, largura, canvas, ctx, totalFrames = 0;
 
 
 function main(){
@@ -93,16 +93,26 @@ function main(){
         enemy_type:[], //um vetor que vai guardar os varios tipos de inimigos
                        //ajuda a fazer o controle de entrada e saida de elementos  
         cores:["#ac0000","#003500"],
+        timer:0,
 
         generate:function() {
             enemy.enemy_type.push(
                 {//objeto que vai representar o inimigo criado
-                    x:300,
+                    x:largura,
                     y:Math.floor(400 * Math.random()),
                     altura:64,
                     largura:64,
                     cor:this.cores[Math.floor(2 * Math.random())]
                 }); //cria um novo inimigo no vetor enemy_type
+                enemy.timer = 250; //define tempo de spam.
+        },
+        spam:function() {
+            if(enemy.timer === 0){
+                enemy.generate();
+            }
+            else{
+                enemy.timer--;
+            }
         },
 
         desenha:function() {
@@ -111,6 +121,16 @@ function main(){
                     ctx.fillRect(enemy.enemy_type[i].x, enemy.enemy_type[i].y, enemy.enemy_type[i].altura, enemy.enemy_type[i].largura);
             };
         },
+        enemy_position:function() {
+                
+                for(var i = 0; i < enemy.enemy_type.length; i++){
+                        enemy.enemy_type[i].x = enemy.enemy_type[i].x -2;     
+               
+                if(enemy.enemy_type[i].x <= -enemy.enemy_type[i].largura){
+                    enemy.enemy_type.splice(i, 1);
+                 }
+                };
+            }
     };
 
     //fazendo os comandos arrowup e arrowdown paramexer um bloco 
@@ -180,6 +200,10 @@ function atualiza() {
     avatar.aceleracao();
     //atualiza a posicao do robo
     avatar.posicao();
+    //spam de inimigos
+    enemy.spam();
+    //atualizar a posiçao do enemy
+    enemy.enemy_position();
 }
 
 function desenha() {
