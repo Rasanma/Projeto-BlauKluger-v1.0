@@ -54,7 +54,7 @@ function main(){
             y:275,
             largura:32,
             altura:64,
-            cor: "white",
+            cor: "black",
             velocidade:0,
             booster:0,
             sprite:function() {
